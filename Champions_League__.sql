@@ -106,7 +106,39 @@ anos. Ordene a consulta por nome do time.
 cadastrado.
 */
 
+--Criando a Estrutura de Cidades (Usado SQL IMPORT AND EXPORT WIZARD)
+alter table Time add IDCidade integer foreign key references Cidade(IDCidade);   
 
+Select *  from Time;
+Select *  from Cidade;
 
+Update Time set IDCidade = 1 where IDTime = 1; 
+Update Time set IDCidade = 2 where IDTime = 2; 
+Update Time set IDCidade = 3 where IDTime = 3; 
 
+--[1]
+select Cidade.nomeCidade, Estado.nomeEstado, Pais.nomePais, Time.nomeTime from Cidade 
+inner join Estado on Cidade.IDEstado = Estado.IDEstado
+inner join Pais on Estado.IDPais = Pais.IDPais
+inner join Time on Time.IDCidade = Cidade.IDCidade;
+--[2]
+select Jogadores.nomeJogador, Jogadores.Idade, Pais.nomePais, Time.nomeTime from Cidade 
+inner join Estado on Cidade.IDEstado = Estado.IDEstado
+inner join Pais on Estado.IDPais = Pais.IDPais
+inner join Time on Time.IDCidade = Cidade.IDCidade
+inner join Jogadores on Time.IDTime = Jogadores.IDTime;
+--[3]
+Insert into Pais values(4,'EUA');
+select P.nomePais Pais, E.nomeEstado Estado from Pais P 
+Left Join Estado E
+on E.IDPais = P.IDPais;
+--[4]
+Insert into Estado values(10,3,'Teste','TT');
+select Cidade.nomeCidade, Estado.nomeEstado, Pais.nomePais from Pais 
+left join Estado on Estado.IDPais = Pais.IDPais
+left join Cidade on Cidade.IDEstado = Estado.IDEstado;
+--[5]
+select nomeCidade, Cidade.IDCidade from Cidade
+full outer join Time on Cidade.IDCidade = Time.IDCidade
+Where Time.IDCidade is null
 
