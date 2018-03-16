@@ -75,7 +75,7 @@ order by Time.IDTime;
 select Time.nomeTime, AVG(Jogadores.Idade) IdadeMedia from Jogadores
 inner join Time on Jogadores.IDTime = Time.IDTime
 group by Time.nomeTime, Time.IDTime
-having AVG(Jogadores.Idade) > 30
+having AVG(Jogadores.Idade) = 30
 order by Time.IDTime;
 --[14]
 Insert into Time values(4,'Manchester');
@@ -139,6 +139,6 @@ left join Estado on Estado.IDPais = Pais.IDPais
 left join Cidade on Cidade.IDEstado = Estado.IDEstado;
 --[5]
 select nomeCidade, Cidade.IDCidade from Cidade
-full outer join Time on Cidade.IDCidade = Time.IDCidade
+left join Time on Cidade.IDCidade = Time.IDCidade
 Where Time.IDCidade is null
 
